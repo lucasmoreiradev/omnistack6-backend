@@ -12,7 +12,8 @@ io.on('connection', socket => {
   })
 })
 
-mongoose.connect('mongodb://localhost:27017/omnistack', {
+mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/omnistack',
+{
   useNewUrlParser: true
 })
 
@@ -28,4 +29,4 @@ app.use('/files', express.static(path.resolve(__dirname, '..', 'tmp')))
 
 app.use(require('./routes'))
 
-server.listen(3333)
+server.listen(process.env.port || 3333)
